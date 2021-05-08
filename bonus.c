@@ -16,6 +16,149 @@
 
 void	printf_rgb(char *rgb, char *format, ...);
 
+t_list	*test_lstnew(void *content)
+{
+	t_list			*node;
+
+	node = (t_list *)malloc(sizeof(t_list));
+	if (node == 0)
+		return (0);
+	node->content = content;
+	node->next = 0;
+	return (node);
+}
+
+void	test_lstadd_front(t_list **alst, t_list *new)
+{
+	t_list			*node;
+
+	if (!new)
+		return ;
+	node = *alst;
+	*alst = new;
+	(*alst)->next = node;
+}
+
+int	test_lstsize(t_list *lst)
+{
+	int			i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+
+t_list	*test_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (0);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	test_lstadd_back(t_list **alst, t_list *new)
+{
+	t_list			*node;
+
+	if (!alst || !new)
+		return ;
+	if (!*alst)
+	{
+		*alst = new;
+		return ;
+	}
+	node = *alst;
+	while (node->next)
+		node = node->next;
+	node->next = new;
+}
+
+void	test_lstdelone(t_list *lst, void (*del)(void*))
+{
+	if (!lst)
+		return ;
+	if (lst->content)
+		del(lst->content);
+	free(lst);
+}
+
+void	test_lstclear(t_list **lst, void (*del)(void*))
+{
+	t_list			*tmp;
+	t_list			*node;
+
+	if (!*lst)
+		return ;
+	node = *lst;
+	while (node)
+	{
+		tmp = node;
+		node = node->next;
+		if (tmp->content)
+			del(tmp->content);
+		free(tmp);
+	}
+	*lst = 0;
+}
+
+void	test_lstiter(t_list *lst, void (*f)(void *))
+{
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
+}
+
+static void	*test_freelst(t_list *lst, void (*del)(void *))
+{
+	t_list			*tmp;
+
+	while (lst)
+	{
+		tmp = lst;
+		lst = lst->next;
+		if (tmp->content)
+			del(tmp->content);
+		free(tmp);
+	}
+	return (0);
+}
+
+t_list	*test_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list			*new;
+	t_list			*node;
+
+	if (!lst)
+		return (0);
+	new = (t_list *)malloc(sizeof(t_list));
+	if (new == 0)
+		return (0);
+	new->content = f(lst->content);
+	new->next = 0;
+	node = new;
+	lst = lst->next;
+	while (lst)
+	{
+		node->next = (t_list *)malloc(sizeof(t_list));
+		if (node->next == 0)
+			return (test_freelst(new, del));
+		node->next->content = f(lst->content);
+		node->next->next = 0;
+		node = node->next;
+		lst = lst->next;
+	}
+	return (new);
+}
+
 void	bonus(void)
 {
 	// assert_ft_lstnew();
