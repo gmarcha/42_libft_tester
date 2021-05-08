@@ -6,7 +6,11 @@ SEP="===========================================================================
 FILES="../*.c"
 
 if [ -z $1 ]; then
-	printf "error: no args.\n"
+	printf "usage: ./tester.sh mand, ./tester.sh bonus, ./tester.sh all.\n"
+	exit 1
+fi
+if [ $1 = "mand" ] && [ $1 = "bonus" ] && [ $1 = "all" ]; then
+	printf "error: invalid arg.\n"
 	exit 1
 fi
 if [ $1 = "mand" ]; then
