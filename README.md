@@ -2,7 +2,7 @@
 A simple and step-by-step tester to C 42 Library.
 
 # How to use it
-**Add this variables to your Makefile, and use them to choose between mandatory, bonus or both. You can add a variable to add your own files.**
+**Add these variables to your Makefile, and use them to choose between mandatory, bonus or both. You can add a variable to add your own files.**
 
 *Only mandatory part:*\
 `FILES		=	$(SRC)`\
