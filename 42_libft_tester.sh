@@ -10,13 +10,13 @@ if [ -z $1 ]; then
 	exit 1
 fi
 if [ $1 = "mand" ]; then
-	MAIN="main_mandatory.c mandatory.c"
+	MAIN="main_mandatory.c"
 fi
 if [ $1 = "bonus" ]; then
-	MAIN="main_bonus.c bonus.c"
+	MAIN="main_bonus.c"
 fi
 if [ $1 = "all" ]; then
-	MAIN="main_all.c mandatory.c bonus.c"
+	MAIN="main_all.c"
 fi
 
 printf "\033[38;2;136;23;152;1;3m$SEP\n\n"
