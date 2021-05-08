@@ -161,7 +161,25 @@ t_list	*test_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 void	lst_ret_cmp(t_list *ret_test, t_list *ret_user)
 {
-	
+	int				ret_cmp;
+
+	ret_cmp = (ret_test == 0 || ret_user == 0) ? (ret_test == ret_user) ? 0 : 1 : (ret_test->content == 0 || ret_user->content == 0) ? (ret_test->content == ret_user->content) ? 0 : 1 : strcmp(ret_test->content, ret_user->content);
+	if (ret_cmp == 0)
+		printf_rgb("57;181;74", "$> OK!\n");
+	else
+	{
+		printf_rgb("222;56;43", "$> KO! expected: ");
+		if (ret_test)
+			printf_rgb("222;56;43", "%20s", ret_test->content);
+		else
+			printf_rgb("222;56;43", "%20s", "(null)");
+		printf_rgb("222;56;43", ", result: ");
+		if (ret_user)
+			printf_rgb("222;56;43", "%20s", ret_user->content);
+		else
+			printf_rgb("222;56;43", "%20s", "(null)");
+		printf_rgb("222;56;43", ".\n");
+	}
 }
 
 void	assert_ft_lstnew(void)
@@ -185,7 +203,7 @@ void	assert_ft_lstnew(void)
 
 void	bonus(void)
 {
-	// assert_ft_lstnew();
+	assert_ft_lstnew();
 	// assert_ft_lstadd_front();
 	// assert_ft_lstsize();
 	// assert_ft_lstlast();
