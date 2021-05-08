@@ -7,22 +7,22 @@ FILES="../*.c"
 
 if [ -z $1 ]; then
 	printf "usage: ./tester.sh [mand/bonus/all]\n"
-	printf "\t\t--mand: mandatory part only\n"
-	printf "\t\t--bonus: bonus part only\n"
-	printf "\t\t--all: both of them\n"
+	printf "\t\t-m, --mand: mandatory part only\n"
+	printf "\t\t-b, --bonus: bonus part only\n"
+	printf "\t\t-a, --all: both of them\n"
 	exit 1
 fi
 if [ $1 != "mand" ] && [ $1 != "bonus" ] && [ $1 != "all" ]; then
-	printf "error: invalid arg.\n"
+	printf "error: invalid args.\n"
 	exit 1
 fi
-if [ $1 = "mand" ]; then
+if [ $1 = "mand" ] || [ $1 = "m" ]; then
 	MAIN="main_mandatory.c"
 fi
-if [ $1 = "bonus" ]; then
+if [ $1 = "bonus" ] || [ $1 = "b" ]; then
 	MAIN="main_bonus.c"
 fi
-if [ $1 = "all" ]; then
+if [ $1 = "all" ] || [ $1 = "a" ]; then
 	MAIN="main_all.c"
 fi
 
