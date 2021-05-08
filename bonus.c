@@ -14,6 +14,7 @@
 #define HEADER(str)		getchar();printf_rgb("136;23;152;1", "\n"S3"\n\n%120s\n", str)
 #define END(str)		printf_rgb("136;23;152;3", "\n%120s\n%120s\n%120s\n", "Test finished.", "https://github.com/gmarcha", str)
 
+#undef	printf_rgb
 void	printf_rgb(char *rgb, char *format, ...)
 {
 	va_list			args;
