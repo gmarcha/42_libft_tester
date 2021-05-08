@@ -159,6 +159,30 @@ t_list	*test_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	return (new);
 }
 
+void	lst_ret_cmp(t_list *ret_test, t_list *ret_user)
+{
+	
+}
+
+void	assert_ft_lstnew(void)
+{
+	char			*strs[] = {"Hello World!", "", 0};
+	t_list			*ret_test;
+	t_list			*ret_user;
+
+	HEADER("assert_ft_lstnew");
+	for (int i = 0; i < 3; i++)
+	{
+		SEP;
+		printf_rgb("255;199;6", "test: str = %13s.\n", strs[i]);
+		ret_test = test_lstnew(strs[i]);
+		ret_user = ft_lstnew(strs[i]);
+		lst_ret_cmp(ret_test, ret_user);
+		free(ret_test);
+		free(ret_user);
+	}
+}
+
 void	bonus(void)
 {
 	// assert_ft_lstnew();
