@@ -12,7 +12,7 @@ if [ -z $1 ]; then
 	printf "\t\t--all: both of them\n"
 	exit 1
 fi
-if [ $1 = "mand" ] && [ $1 = "bonus" ] && [ $1 = "all" ]; then
+if [ $1 != "mand" ] && [ $1 != "bonus" ] && [ $1 != "all" ]; then
 	printf "error: invalid arg.\n"
 	exit 1
 fi
