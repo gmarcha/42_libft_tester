@@ -2,7 +2,7 @@
 A simple and step-by-step tester to C 42 Library.
 
 # How to use it ?
-You need to clone this tester in your own Libft repository, go in the tester directory, and run tester.sh with an option:\
+You need to clone this tester in your own Libft repository, go in the tester directory, and run tester.sh with an argument:\
 `./tester.sh mand` or `./tester.sh m`\
 `./tester.sh bonus` or `./tester.sh b`\
 `./tester.sh all` or `./tester.sh a`\
