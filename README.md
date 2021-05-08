@@ -2,17 +2,17 @@
 A simple and step-by-step tester to C 42 Library.
 
 # How to use it
-Add this variables to your Makefile, and use them to choose between mandatory, bonus or both. You can add a variable to add your own files.
+**Add this variables to your Makefile, and use them to choose between mandatory, bonus or both. You can add a variable to add your own files.**
 
-*Only mandatory part:*  
+*Only mandatory part:*\
 `FILES		=	$(SRC)`\
 `FILES_OBJ	=	$(OBJ) main.o mandatory.o`
 
-*Example with an extension:*  
+*Example with an extension:*\
 `FILES		=	$(SRC) $(BONUS) $(EXP)`\
 `FILES_OBJ	=	$(OBJ) $(BONUS_OBJ) $(EXP_OBJ) main.o mandatory.o bonus.o expand.o`
 
-Then add this rule.
+**Then add this rule, and copy main.c, mandatory.c and the neccesary files in your repository. Run the tester with make test.**
 
 `test:		$(FILES_OBJ)`\
 			`@echo "\033[38;2;136;23;152;1;3m\n========================================================================================================================\n"`\
