@@ -17,13 +17,13 @@ if [ $1 != "mand" ] && [ $1 != "bonus" ] && [ $1 != "all" ] && [ $1 != "m" ] && 
 	exit 1
 fi
 if [ $1 = "mand" ] || [ $1 = "m" ]; then
-	MAIN="main_mandatory.c"
+	MAIN="main_mandatory.c utils.c"
 fi
 if [ $1 = "bonus" ] || [ $1 = "b" ]; then
-	MAIN="main_bonus.c"
+	MAIN="main_bonus.c utils.c"
 fi
 if [ $1 = "all" ] || [ $1 = "a" ]; then
-	MAIN="main_all.c"
+	MAIN="main_all.c utils.c"
 fi
 
 printf "\033[38;2;136;23;152;1;3m$SEP\n\n"
