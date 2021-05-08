@@ -6,7 +6,10 @@ SEP="===========================================================================
 FILES="../*.c"
 
 if [ -z $1 ]; then
-	printf "usage: ./tester.sh mand, ./tester.sh bonus, ./tester.sh all.\n"
+	printf "usage: ./tester.sh [mand/bonus/all]\n"
+	printf "\t\t--mand: mandatory part only\n"
+	printf "\t\t--bonus: bonus part only\n"
+	printf "\t\t--all: both of them\n"
 	exit 1
 fi
 if [ $1 = "mand" ] && [ $1 = "bonus" ] && [ $1 = "all" ]; then
