@@ -20,10 +20,10 @@ void	printf_rgb(char *rgb, char *format, ...);
 
 void	assert_ft_example(void)
 {
-	
+
 }
 
-void	mandatory(void)
+void	expand(void)
 {
 	void	(*test[1])() = {
 		assert_ft_example
