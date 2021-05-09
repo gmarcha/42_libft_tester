@@ -445,13 +445,19 @@ void	assert_ft_memset(void)
 	HEADER("assert_ft_memset");
 	for (int i = 0; i < 4; i++)
 	{
-		SEP;
-		memset(test, 97, 20);
-		memset(user, 97, 20);
-		printf_rgb("255;199;6", "test: dest = %20s, value = %c, size = %2d.\n", test, charset[i], input[i]);
-		ret_test = (char *)memset(test, charset[i], input[i]);
-		ret_user = (char *)ft_memset(user, charset[i], input[i]);
-		str_out_ret_cmp(test, user, ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			memset(test, 97, 20);
+			memset(user, 97, 20);
+			printf_rgb("255;199;6", "test: dest = %20s, value = %c, size = %2d.\n", test, charset[i], input[i]);
+			ret_test = (char *)memset(test, charset[i], input[i]);
+			ret_user = (char *)ft_memset(user, charset[i], input[i]);
+			str_out_ret_cmp(test, user, ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -464,13 +470,19 @@ void	assert_ft_bzero(void)
 	HEADER("assert_ft_bzero");
 	for (int i = 0; i < 2; i++)
 	{
-		SEP;
-		memset(test, 97, 20);
-		memset(user, 97, 20);
-		printf_rgb("255;199;6", "test: dest = %20s, size = %2d.\n", test, input[i]);
-		bzero(test, input[i]);
-		ft_bzero(user, input[i]);
-		str_out_cmp(test, user);
+		if (fork() == 0)
+		{
+			SEP;
+			memset(test, 97, 20);
+			memset(user, 97, 20);
+			printf_rgb("255;199;6", "test: dest = %20s, size = %2d.\n", test, input[i]);
+			bzero(test, input[i]);
+			ft_bzero(user, input[i]);
+			str_out_cmp(test, user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -489,13 +501,19 @@ void	assert_ft_memcpy(void)
 	HEADER("assert_ft_memcpy");
 	for (int i = 0; strs[i]; i++)
 	{
-		SEP;
-		memset(test, 97, 20);
-		memset(user, 97, 20);
-		printf_rgb("255;199;6", "test: dest = %20s, src = %20s, size = %2d.\n", test, strs[i], input[i]);
-		ret_test = (char *)memcpy(test, strs[i], input[i]);
-		ret_user = (char *)ft_memcpy(user, strs[i], input[i]);
-		str_out_ret_cmp(test, user, ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			memset(test, 97, 20);
+			memset(user, 97, 20);
+			printf_rgb("255;199;6", "test: dest = %20s, src = %20s, size = %2d.\n", test, strs[i], input[i]);
+			ret_test = (char *)memcpy(test, strs[i], input[i]);
+			ret_user = (char *)ft_memcpy(user, strs[i], input[i]);
+			str_out_ret_cmp(test, user, ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -516,13 +534,19 @@ void	assert_ft_memccpy(void)
 	HEADER("assert_ft_memccpy");
 	for (int i = 0; strs[i]; i++)
 	{
-		SEP;
-		memset(test, 97, 20);
-		memset(user, 97, 20);
-		printf_rgb("255;199;6", "test: dest = %20s, src = %20s, value = %c, size = %2d.\n", test, strs[i], c, input[i]);
-		ret_test = (char *)memccpy(test, strs[i], c, input[i]);
-		ret_user = (char *)ft_memccpy(user, strs[i], c, input[i]);
-		str_out_ret_cmp(test, user, ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			memset(test, 97, 20);
+			memset(user, 97, 20);
+			printf_rgb("255;199;6", "test: dest = %20s, src = %20s, value = %c, size = %2d.\n", test, strs[i], c, input[i]);
+			ret_test = (char *)memccpy(test, strs[i], c, input[i]);
+			ret_user = (char *)ft_memccpy(user, strs[i], c, input[i]);
+			str_out_ret_cmp(test, user, ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -544,23 +568,35 @@ void	assert_ft_memmove(void)
 	HEADER("assert_ft_memmove");
 	for (int i = 0; i < 4; i++)
 	{
-		SEP;
-		memset(test, 97, 20);
-		memset(user, 97, 20);
-		printf_rgb("255;199;6", "test: dest = %20s, src = %20s, size = %2d.\n", test, strs[i], input[i]);
-		ret_test = memmove(test, strs[i], input[i]);
-		ret_user = ft_memmove(user, strs[i], input[i]);
-		str_out_ret_cmp(test, user, ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			memset(test, 97, 20);
+			memset(user, 97, 20);
+			printf_rgb("255;199;6", "test: dest = %20s, src = %20s, size = %2d.\n", test, strs[i], input[i]);
+			ret_test = memmove(test, strs[i], input[i]);
+			ret_user = ft_memmove(user, strs[i], input[i]);
+			str_out_ret_cmp(test, user, ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 	for (int i = 0; i < 2; i++)
 	{
-		SEP;
-		memset(test, 97, 10);memset(test + 10, 98, 10);
-		memset(user, 97, 10);memset(user + 10, 98, 10);
-		printf_rgb("255;199;6", "test: dest = %20s, src = %20s, size = %2d.\n", test + overlap_a[i], test + overlap_b[i], 10);
-		ret_test = memmove(test + overlap_a[i], test + overlap_b[i], 10);
-		ret_user = ft_memmove(user + overlap_a[i], user + overlap_b[i], 10);
-		str_out_ret_cmp(test, user, ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			memset(test, 97, 10);memset(test + 10, 98, 10);
+			memset(user, 97, 10);memset(user + 10, 98, 10);
+			printf_rgb("255;199;6", "test: dest = %20s, src = %20s, size = %2d.\n", test + overlap_a[i], test + overlap_b[i], 10);
+			ret_test = memmove(test + overlap_a[i], test + overlap_b[i], 10);
+			ret_user = ft_memmove(user + overlap_a[i], user + overlap_b[i], 10);
+			str_out_ret_cmp(test, user, ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -580,11 +616,17 @@ void	assert_ft_memchr(void)
 	HEADER("assert_ft_memchr");
 	for (int i = 0; i < 4; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: dest = %20s, value = %c, size = %2d.\n", test, charset[i], input[i]);
-		ret_test = (char *)memchr(test, charset[i], input[i]);
-		ret_user = (char *)ft_memchr(user, charset[i], input[i]);
-		str_ret_cmp(ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: dest = %20s, value = %c, size = %2d.\n", test, charset[i], input[i]);
+			ret_test = (char *)memchr(test, charset[i], input[i]);
+			ret_user = (char *)ft_memchr(user, charset[i], input[i]);
+			str_ret_cmp(ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -607,11 +649,17 @@ void	assert_ft_memcmp(void)
 	HEADER("assert_ft_memcmp");
 	for (int i = 0; i < 7; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: s1 = %20s, s2 = %20s, size = %2d.\n", test, strs[i], input[i]);
-		ret_test = memcmp(test, strs[i], input[i]);
-		ret_user = ft_memcmp(user, strs[i], input[i]);
-		signed_ret_cmp(ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: s1 = %20s, s2 = %20s, size = %2d.\n", test, strs[i], input[i]);
+			ret_test = memcmp(test, strs[i], input[i]);
+			ret_user = ft_memcmp(user, strs[i], input[i]);
+			signed_ret_cmp(ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -624,11 +672,17 @@ void	assert_ft_strlen(void)
 	HEADER("assert_ft_strlen");
 	for (int i = 0; strs[i]; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: str = %12s.\n", strs[i]);
-		ret_test = strlen(strs[i]);
-		ret_user = ft_strlen(strs[i]);
-		int_ret_cmp(ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: str = %12s.\n", strs[i]);
+			ret_test = strlen(strs[i]);
+			ret_user = ft_strlen(strs[i]);
+			int_ret_cmp(ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -706,11 +760,17 @@ void	assert_ft_strchr_(char *name, char *(*f)(const char *, int), char *(*ft_f)(
 	HEADER(name);
 	for (int i = 0; i < 4; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: dest = %20s, value = %c.\n", test, charset[i]);
-		ret_test = f(test, charset[i]);
-		ret_user = ft_f(user, charset[i]);
-		str_ret_cmp(ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: dest = %20s, value = %c.\n", test, charset[i]);
+			ret_test = f(test, charset[i]);
+			ret_user = ft_f(user, charset[i]);
+			str_ret_cmp(ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -743,11 +803,17 @@ void	assert_ft_strncmp(void)
 	HEADER("assert_ft_strncmp");
 	for (int i = 0; i < 7; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: s1 = %20s, s2 = %20s, size = %2d.\n", test, strs[i], input[i]);
-		ret_test = strncmp(test, strs[i], input[i]);
-		ret_user = ft_strncmp(user, strs[i], input[i]);
-		signed_ret_cmp(ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: s1 = %20s, s2 = %20s, size = %2d.\n", test, strs[i], input[i]);
+			ret_test = strncmp(test, strs[i], input[i]);
+			ret_user = ft_strncmp(user, strs[i], input[i]);
+			signed_ret_cmp(ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -767,13 +833,19 @@ void	assert_ft_strlcpy(void)
 	HEADER("assert_ft_strlcpy");
 	for (int i = 0; i < 5; i++)
 	{
-		SEP;
-		memset(test, 97, 20);
-		memset(user, 97, 20);
-		printf_rgb("255;199;6", "test: dest = %20s, src = %20s, size = %2d.\n", test, strs[i], input[i]);
-		ret_test = bsd_strlcpy(test, strs[i], input[i]);
-		ret_user = ft_strlcpy(user, strs[i], input[i]);
-		str_out_int_ret_cmp(test, user, ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			memset(test, 97, 20);
+			memset(user, 97, 20);
+			printf_rgb("255;199;6", "test: dest = %20s, src = %20s, size = %2d.\n", test, strs[i], input[i]);
+			ret_test = bsd_strlcpy(test, strs[i], input[i]);
+			ret_user = ft_strlcpy(user, strs[i], input[i]);
+			str_out_int_ret_cmp(test, user, ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -793,13 +865,19 @@ void	assert_ft_strlcat(void)
 	HEADER("assert_ft_strlcat");
 	for (int i = 0; i < 5; i++)
 	{
-		SEP;
-		memset(test, 97, 40);memset(test + 20, 0, 20);
-		memset(user, 97, 40);memset(user + 20, 0, 20);
-		printf_rgb("255;199;6", "test: dest = %20s, src = %20s, size = %2d.\n", test, strs[i], input[i]);
-		ret_test = bsd_strlcat(test, strs[i], input[i]);
-		ret_user = ft_strlcat(user, strs[i], input[i]);
-		str_out_int_ret_cmp(test, user, ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			memset(test, 97, 40);memset(test + 20, 0, 20);
+			memset(user, 97, 40);memset(user + 20, 0, 20);
+			printf_rgb("255;199;6", "test: dest = %20s, src = %20s, size = %2d.\n", test, strs[i], input[i]);
+			ret_test = bsd_strlcat(test, strs[i], input[i]);
+			ret_user = ft_strlcat(user, strs[i], input[i]);
+			str_out_int_ret_cmp(test, user, ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -814,11 +892,17 @@ void	assert_ft_strnstr(void)
 	HEADER("assert_ft_strnstr");
 	for (int i = 0; strs[i]; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: big = %12s, little = %12s, len = %2d.\n", str, strs[i], input[i]);
-		ret_test = bsd_strnstr(str, strs[i], input[i]);
-		ret_user = ft_strnstr(str, strs[i], input[i]);
-		str_ret_cmp(ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: big = %12s, little = %12s, len = %2d.\n", str, strs[i], input[i]);
+			ret_test = bsd_strnstr(str, strs[i], input[i]);
+			ret_user = ft_strnstr(str, strs[i], input[i]);
+			str_ret_cmp(ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -831,11 +915,17 @@ void	assert_ft_atoi(void)
 	HEADER("assert_ft_atoi");
 	for (int i = 0; strs[i]; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: str = %11s.\n", strs[i]);
-		ret_test = atoi(strs[i]);
-		ret_user = ft_atoi(strs[i]);
-		int_ret_cmp(ret_test, ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: str = %11s.\n", strs[i]);
+			ret_test = atoi(strs[i]);
+			ret_user = ft_atoi(strs[i]);
+			int_ret_cmp(ret_test, ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -849,17 +939,23 @@ void	assert_ft_calloc(void)
 	HEADER("assert_ft_calloc");
 	for (int i = 0; i < 3; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: type = char, size = %3d.\n", input[i]);
-		ret_test = calloc(input[i], 1);
-		ret_user = ft_calloc(input[i], 1);
-		ret_cmp = (ret_test == 0 || ret_user == 0) ? (ret_test == ret_user) ? 0 : 1 : memcmp(ret_test, ret_user, input[i]);
-		if (ret_cmp == 0)
-			printf_rgb("57;181;74", "$> OK!\n");
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: type = char, size = %3d.\n", input[i]);
+			ret_test = calloc(input[i], 1);
+			ret_user = ft_calloc(input[i], 1);
+			ret_cmp = (ret_test == 0 || ret_user == 0) ? (ret_test == ret_user) ? 0 : 1 : memcmp(ret_test, ret_user, input[i]);
+			if (ret_cmp == 0)
+				printf_rgb("57;181;74", "$> OK!\n");
+			else
+				printf_rgb("222;56;43", "$> KO! invalid diff.\n");
+			free(ret_test);
+			free(ret_user);
+			exit(0);
+		}
 		else
-			printf_rgb("222;56;43", "$> KO! invalid diff.\n");
-		free(ret_test);
-		free(ret_user);
+			wait(0);
 	}
 }
 
@@ -872,13 +968,19 @@ void	assert_ft_strdup(void)
 	HEADER("assert_ft_strdup");
 	for (int i = 0; strs[i]; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: src = %20s.\n", strs[i]);
-		ret_test = strdup(strs[i]);
-		ret_user = ft_strdup(strs[i]);
-		str_ret_cmp(ret_test, ret_user);
-		free(ret_test);
-		free(ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: src = %20s.\n", strs[i]);
+			ret_test = strdup(strs[i]);
+			ret_user = ft_strdup(strs[i]);
+			str_ret_cmp(ret_test, ret_user);
+			free(ret_test);
+			free(ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -893,13 +995,19 @@ void	assert_ft_substr(void)
 	HEADER("assert_ft_substr");
 	for (int i = 0; i < 7; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: str = %s, start = %3d, len = %3d.\n", str, start[i], len[i]);
-		ret_test = test_substr(str, start[i], len[i]);
-		ret_user = ft_substr(str, start[i], len[i]);
-		str_ret_cmp(ret_test, ret_user);
-		free(ret_test);
-		free(ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: str = %s, start = %3d, len = %3d.\n", str, start[i], len[i]);
+			ret_test = test_substr(str, start[i], len[i]);
+			ret_user = ft_substr(str, start[i], len[i]);
+			str_ret_cmp(ret_test, ret_user);
+			free(ret_test);
+			free(ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -913,13 +1021,19 @@ void	assert_ft_strjoin(void)
 	HEADER("assert_ft_strjoin");
 	for (int i = 0; s1[i]; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: s1 = %12s, s2 = %12s.\n", s1[i], s2[i]);
-		ret_test = test_strjoin(s1[i], s2[i]);
-		ret_user = ft_strjoin(s1[i], s2[i]);
-		str_ret_cmp(ret_test, ret_user);
-		free(ret_test);
-		free(ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: s1 = %12s, s2 = %12s.\n", s1[i], s2[i]);
+			ret_test = test_strjoin(s1[i], s2[i]);
+			ret_user = ft_strjoin(s1[i], s2[i]);
+			str_ret_cmp(ret_test, ret_user);
+			free(ret_test);
+			free(ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -939,13 +1053,19 @@ void	assert_ft_strtrim(void)
 	HEADER("assert_ft_strtrim");
 	for (int i = 0; strs[i]; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: str = %23s, charset = %s.\n", strs[i], charset);
-		ret_test = test_strtrim(strs[i], charset);
-		ret_user = ft_strtrim(strs[i], charset);
-		str_ret_cmp(ret_test, ret_user);
-		free(ret_test);
-		free(ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: str = %23s, charset = %s.\n", strs[i], charset);
+			ret_test = test_strtrim(strs[i], charset);
+			ret_user = ft_strtrim(strs[i], charset);
+			str_ret_cmp(ret_test, ret_user);
+			free(ret_test);
+			free(ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -968,39 +1088,45 @@ void	assert_ft_split(void)
 	HEADER("assert_ft_split");
 	for (int i = 0; strs[i]; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: str = %28s, sep = %c.\n", strs[i], sep);
-		ret_test = test_split(strs[i], sep);
-		ret_user = ft_split(strs[i], sep);
-		if (ret_test != 0 && ret_user != 0)
-			for (int j = 0; ret_test[j] || ret_user[j]; j++)
-			{
-				ret_cmp = (ret_test[j] == 0 || ret_user[j] == 0) ? (ret_test[j] == ret_user[j]) ? 0 : 1 : strcmp(ret_test[j], ret_user[j]);
-				if (ret_cmp == 0)
-					printf_rgb("57;181;74", "$> Line %d : OK!\n", j + 1);
-				else
-					printf_rgb("222;56;43", "$> Line %d : KO! expected: %2s, result: %2s.\n", j + 1, ret_test[j], ret_user[j]);
-				if (ret_test[j] != 0)
-					free(ret_test[j]);
-				if (ret_user[j] != 0)
-					free(ret_user[j]);
-			}
-		else
+		if (fork() == 0)
 		{
-			printf_rgb("222;56;43", "$> KO! invalid split.");
-			if (ret_test != 0)
-				for (int j = 0; ret_test[j]; j++)
+			SEP;
+			printf_rgb("255;199;6", "test: str = %28s, sep = %c.\n", strs[i], sep);
+			ret_test = test_split(strs[i], sep);
+			ret_user = ft_split(strs[i], sep);
+			if (ret_test != 0 && ret_user != 0)
+				for (int j = 0; ret_test[j] || ret_user[j]; j++)
+				{
+					ret_cmp = (ret_test[j] == 0 || ret_user[j] == 0) ? (ret_test[j] == ret_user[j]) ? 0 : 1 : strcmp(ret_test[j], ret_user[j]);
+					if (ret_cmp == 0)
+						printf_rgb("57;181;74", "$> Line %d : OK!\n", j + 1);
+					else
+						printf_rgb("222;56;43", "$> Line %d : KO! expected: %2s, result: %2s.\n", j + 1, ret_test[j], ret_user[j]);
 					if (ret_test[j] != 0)
 						free(ret_test[j]);
-			if (ret_user != 0)
-				for (int j = 0; ret_user[j]; j++)
 					if (ret_user[j] != 0)
 						free(ret_user[j]);
+				}
+			else
+			{
+				printf_rgb("222;56;43", "$> KO! invalid split.");
+				if (ret_test != 0)
+					for (int j = 0; ret_test[j]; j++)
+						if (ret_test[j] != 0)
+							free(ret_test[j]);
+				if (ret_user != 0)
+					for (int j = 0; ret_user[j]; j++)
+						if (ret_user[j] != 0)
+							free(ret_user[j]);
+			}
+			if (ret_test != 0)
+				free(ret_test);
+			if (ret_user != 0)
+				free(ret_user);
+			exit(0);
 		}
-		if (ret_test != 0)
-			free(ret_test);
-		if (ret_user != 0)
-			free(ret_user);
+		else
+			wait(0);
 	}
 }
 
@@ -1013,13 +1139,19 @@ void	assert_ft_itoa(void)
 	HEADER("assert_ft_itoa");
 	for (int i = 0; i < 7; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: nb = %11d.\n", input[i]);
-		ret_test = test_itoa(input[i]);
-		ret_user = ft_itoa(input[i]);
-		str_ret_cmp(ret_test, ret_user);
-		free(ret_test);
-		free(ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: nb = %11d.\n", input[i]);
+			ret_test = test_itoa(input[i]);
+			ret_user = ft_itoa(input[i]);
+			str_ret_cmp(ret_test, ret_user);
+			free(ret_test);
+			free(ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
