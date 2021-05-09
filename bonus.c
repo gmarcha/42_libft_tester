@@ -263,8 +263,7 @@ void	assert_ft_lstadd_front(void)
 
 void	assert_ft_lstsize(void)
 {
-	char			*arrs[] = 	{(char *[]){"Third", "Second", "First", 0},
-								(char *[]){"First", "Second", "Third", 0},
+	char			**arrs[] = 	{(char *[]){"Third", "Second", "First", 0},
 								(char *[]){"", 0},
 								(char *[]){0},
 								0};
@@ -291,20 +290,26 @@ void	assert_ft_lstsize(void)
 
 void	assert_ft_lstlast(void)
 {
-	char			*strs[] = {"Third", "Second", "First", 0};
+	char			**arrs[] = 	{(char *[]){"Third", "Second", "First", 0},
+								(char *[]){"", 0},
+								(char *[]){0},
 	t_list			*test = 0;
 	t_list			*ret_test;
 	t_list			*ret_user;
 
 	HEADER("assert_ft_lstlast");
-	SEP;
-	printf_rgb("255;199;6", "test: last element = %s.\n", strs[0]);
-	for (int i = 0; strs[i]; i++)
-		test_lstadd_front(&test, test_lstnew(strs[i]));
-	ret_test = test_lstlast(test);
-	ret_user = ft_lstlast(test);
-	lst_ret_cmp(ret_test, ret_user);
-	destroy(test);
+	for (int i = 0; arrs[i]; i++)
+	{
+		SEP;
+		for (int j = 0; arrs[i][j]; j++)
+			test_lstadd_front(&test, test_lstnew(arrs[i][j]));
+		printf_rgb("255;199;6", "test: last element = %s.\n", arrs[i][0]);
+		ret_test = test_lstlast(test);
+		ret_user = ft_lstlast(test);
+		lst_ret_cmp(ret_test, ret_user);
+		destroy(test);
+		test = 0;
+	}
 }
 
 void	bonus(void)
