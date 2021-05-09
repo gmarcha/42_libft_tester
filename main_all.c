@@ -7,6 +7,6 @@ int	main(void)
 	mandatory();
 	bonus();
 	expand();
-	END("@2021, 42 Libft Tester, mandatory and bonus parts.");
+	END("@2021, 42 Libft Tester, all parts.");
 	return (0);
 }
