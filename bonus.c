@@ -117,7 +117,7 @@ void	test_lstiter(t_list *lst, void (*f)(void *))
 	}
 }
 
-static void	*test_freelst(t_list *lst, void (*del)(void *))
+void	*test_freelst(t_list *lst, void (*del)(void *))
 {
 	t_list			*tmp;
 
@@ -159,6 +159,18 @@ t_list	*test_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	return (new);
 }
 
+void	destroy(t_list *lst)
+{
+	t_list			*tmp;
+
+	while (lst)
+	{
+		tmp = lst;
+		lst = lst->next;
+		free(tmp);
+	}
+}
+
 void	lst_ret_cmp(t_list *ret_test, t_list *ret_user)
 {
 	int				ret_cmp;
@@ -182,6 +194,33 @@ void	lst_ret_cmp(t_list *ret_test, t_list *ret_user)
 	}
 }
 
+void	lst_out_cmp(t_list *ret_test, t_list *ret_user)
+{
+	int				k;
+
+	if (ret_test != 0 && ret_user != 0)
+	{
+		k = 1;
+		while (ret_test || ret_user)
+		{
+			if (ret_test != 0 && ret_user != 0)
+			{
+				if (strcmp(ret_test->content, ret_user->content) == 0)
+					printf_rgb("57;181;74", "$> Element %d : OK!\n", k);
+				else
+					printf_rgb("222;56;43", "$> Element %d : KO! expected: %6s, result: %6s.\n", k, ret_test->content, ret_user->content);
+			}
+			else
+				printf_rgb("222;56;43", "$> Element %d : KO! invalid element.\n", k);
+			k++;
+			ret_test = ret_test->next;
+			ret_user = ret_user->next;
+		}
+	}
+	else
+		printf_rgb("222;56;43", "$> KO! invalid list.");
+}
+
 void	assert_ft_lstnew(void)
 {
 	char			*strs[] = {"Hello World!", "", 0};
@@ -201,10 +240,29 @@ void	assert_ft_lstnew(void)
 	}
 }
 
+void	assert_ft_lstadd_front(void)
+{
+	char			*strs[] = {"Third", "Second", "First", 0};
+	t_list			*ret_test = 0;
+	t_list			*ret_user = 0;
+
+	HEADER("assert_ft_lstadd_front");
+	SEP;
+	printf_rgb("255;199;6", "test: add three elements.\n");
+	for (int i = 0; strs[i]; i++)
+	{
+		test_lstadd_front(&ret_test, test_lstnew(strs[i]));
+		ft_lstadd_front(&ret_user, test_lstnew(strs[i]));
+	}
+	lst_out_cmp(ret_test, ret_user);
+	destroy(ret_test);
+	destroy(ret_user);
+}
+
 void	bonus(void)
 {
 	assert_ft_lstnew();
-	// assert_ft_lstadd_front();
+	assert_ft_lstadd_front();
 	// assert_ft_lstsize();
 	// assert_ft_lstlast();
 	// assert_ft_lstadd_back();
