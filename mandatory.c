@@ -1037,13 +1037,19 @@ void	assert_ft_strmapi(void)
 	HEADER("assert_ft_strmapi");
 	for (int i = 0; strs[i]; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: str = %12s.\n", strs[i]);
-		ret_test = test_strmapi(strs[i], f_strmapi);
-		ret_user = ft_strmapi(strs[i], f_strmapi);
-		str_ret_cmp(ret_test, ret_user);
-		free(ret_test);
-		free(ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: str = %12s.\n", strs[i]);
+			ret_test = test_strmapi(strs[i], f_strmapi);
+			ret_user = ft_strmapi(strs[i], f_strmapi);
+			str_ret_cmp(ret_test, ret_user);
+			free(ret_test);
+			free(ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
