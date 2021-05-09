@@ -389,13 +389,17 @@ void	assert_ft_lstclear(void)
 
 void	bonus(void)
 {
-	assert_ft_lstnew();
-	assert_ft_lstadd_front();
-	assert_ft_lstsize();
-	assert_ft_lstlast();
-	assert_ft_lstadd_back();
-	assert_ft_lstdelone();
-	assert_ft_lstclear();
-	// assert_ft_lstiter();
-	// assert_ft_lstmap();
+	void	(*test[9 - 2])() = {
+		assert_ft_lstnew,
+		assert_ft_lstadd_front,
+		assert_ft_lstsize,
+		assert_ft_lstlast,
+		assert_ft_lstadd_back,
+		assert_ft_lstdelone,
+		assert_ft_lstclear
+		// assert_ft_lstiter,
+		// assert_ft_lstmap
+	};
+	for (int i = 0; i < 9 - 2; i++)
+		test[i]();
 }
