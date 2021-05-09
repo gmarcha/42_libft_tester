@@ -9,12 +9,12 @@
 #include <sys/wait.h>
 #include "../libft.h"
 
-#define S1				"========================================================================================================================"
-#define S2				"------------------------------------------------------------------------------------------------------------------------"
-#define S3				"________________________________________________________________________________________________________________________"
+#define S1				"============================================================================================================================================"
+#define S2				"--------------------------------------------------------------------------------------------------------------------------------------------"
+#define S3				"____________________________________________________________________________________________________________________________________________"
 #define SEP				printf_rgb("255;199;6", S2"\n")
-#define HEADER(str)		getchar();printf_rgb("136;23;152;1", "\n"S3"\n\n%120s\n", str)
-#define END(str)		printf_rgb("136;23;152;3", "\n%120s\n%120s\n%120s\n", "Test finished.", "https://github.com/gmarcha", str)
+#define HEADER(str)		getchar();printf_rgb("136;23;152;1", "\n"S3"\n\n%140s\n", str)
+#define END(str)		printf_rgb("136;23;152;3", "\n%140s\n%140s\n%140s\n", "Test finished.", "https://github.com/gmarcha", str)
 
 void	printf_rgb(char *rgb, char *format, ...);
 
@@ -245,13 +245,19 @@ void	assert_ft_lstnew(void)
 	HEADER("assert_ft_lstnew");
 	for (int i = 0; i < 3; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: str = %13s.\n", strs[i]);
-		ret_test = test_lstnew(strs[i]);
-		ret_user = ft_lstnew(strs[i]);
-		lst_ret_cmp(ret_test, ret_user);
-		free(ret_test);
-		free(ret_user);
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: str = %13s.\n", strs[i]);
+			ret_test = test_lstnew(strs[i]);
+			ret_user = ft_lstnew(strs[i]);
+			lst_ret_cmp(ret_test, ret_user);
+			free(ret_test);
+			free(ret_user);
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -297,17 +303,23 @@ void	assert_ft_lstsize(void)
 	HEADER("assert_ft_lstsize");
 	for (int i = 0; arrs[i]; i++)
 	{
-		SEP;
-		for (int j = 0; arrs[i][j]; j++)
-			test_lstadd_front(&test, test_lstnew(arrs[i][j]));
-		printf_rgb("255;199;6", "test: list of size %d.\n", ret_test = test_lstsize(test));
-		ret_user = ft_lstsize(test);
-		if (ret_test == ret_user)
-			printf_rgb("57;181;74", "$> OK!\n");
+		if (fork() == 0)
+		{
+			SEP;
+			for (int j = 0; arrs[i][j]; j++)
+				test_lstadd_front(&test, test_lstnew(arrs[i][j]));
+			printf_rgb("255;199;6", "test: list of size %d.\n", ret_test = test_lstsize(test));
+			ret_user = ft_lstsize(test);
+			if (ret_test == ret_user)
+				printf_rgb("57;181;74", "$> OK!\n");
+			else
+				printf_rgb("222;56;43", "$> KO! expected: %d, result: %d.\n", ret_test, ret_user);
+			destroy(test);
+			test = 0;
+			exit(0);
+		}
 		else
-			printf_rgb("222;56;43", "$> KO! expected: %d, result: %d.\n", ret_test, ret_user);
-		destroy(test);
-		test = 0;
+			wait(0);
 	}
 }
 
@@ -324,15 +336,21 @@ void	assert_ft_lstlast(void)
 	HEADER("assert_ft_lstlast");
 	for (int i = 0; arrs[i]; i++)
 	{
-		SEP;
-		for (int j = 0; arrs[i][j]; j++)
-			test_lstadd_front(&test, test_lstnew(arrs[i][j]));
-		printf_rgb("255;199;6", "test: last element = %s.\n", arrs[i][0]);
-		ret_test = test_lstlast(test);
-		ret_user = ft_lstlast(test);
-		lst_ret_cmp(ret_test, ret_user);
-		destroy(test);
-		test = 0;
+		if (fork() == 0)
+		{
+			SEP;
+			for (int j = 0; arrs[i][j]; j++)
+				test_lstadd_front(&test, test_lstnew(arrs[i][j]));
+			printf_rgb("255;199;6", "test: last element = %s.\n", arrs[i][0]);
+			ret_test = test_lstlast(test);
+			ret_user = ft_lstlast(test);
+			lst_ret_cmp(ret_test, ret_user);
+			destroy(test);
+			test = 0;
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
@@ -344,14 +362,20 @@ void	assert_ft_lstdelone(void)
 	HEADER("assert_ft_lstdelone");
 	for (int i = 0; i < 2; i++)
 	{
-		SEP;
-		printf_rgb("255;199;6", "test: element->content = %12s.\n", strs[i]);
-		if (strs[i])
-			ret = test_lstnew(strdup(strs[i]));
+		if (fork() == 0)
+		{
+			SEP;
+			printf_rgb("255;199;6", "test: element->content = %12s.\n", strs[i]);
+			if (strs[i])
+				ret = test_lstnew(strdup(strs[i]));
+			else
+				ret = test_lstnew(strs[i]);
+			ft_lstdelone(ret, free);
+			printf_rgb("57;181;74", "$> Done!\n");
+			exit(0);
+		}
 		else
-			ret = test_lstnew(strs[i]);
-		ft_lstdelone(ret, free);
-		printf_rgb("57;181;74", "$> Done!\n");
+			wait(0);
 	}
 }
 
@@ -366,12 +390,18 @@ void	assert_ft_lstclear(void)
 	HEADER("assert_ft_lstclear");
 	for (int i = 0; arrs[i]; i++)
 	{
-		SEP;
-		for (int j = 0; arrs[i][j]; j++)
-			test_lstadd_front(&test, test_lstnew(strdup(arrs[i][j])));
-		printf_rgb("255;199;6", "test: list size = %d.\n", test_lstsize(test));
-		ft_lstclear(&test, free);
-		printf_rgb("57;181;74", "$> Done!\n");
+		if (fork() == 0)
+		{
+			SEP;
+			for (int j = 0; arrs[i][j]; j++)
+				test_lstadd_front(&test, test_lstnew(strdup(arrs[i][j])));
+			printf_rgb("255;199;6", "test: list size = %d.\n", test_lstsize(test));
+			ft_lstclear(&test, free);
+			printf_rgb("57;181;74", "$> Done!\n");
+			exit(0);
+		}
+		else
+			wait(0);
 	}
 }
 
