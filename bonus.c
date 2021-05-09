@@ -213,8 +213,10 @@ void	lst_out_cmp(t_list *ret_test, t_list *ret_user)
 			else
 				printf_rgb("222;56;43", "$> Element %d : KO! invalid element.\n", k);
 			k++;
-			ret_test = ret_test->next;
-			ret_user = ret_user->next;
+			if (ret_test)
+				ret_test = ret_test->next;
+			if (ret_user)
+				ret_user = ret_user->next;
 		}
 	}
 	else
@@ -257,6 +259,45 @@ void	assert_ft_lstadd_front(void)
 	lst_out_cmp(ret_test, ret_user);
 	destroy(ret_test);
 	destroy(ret_user);
+}
+
+void	assert_ft_lstsize(void)
+{
+	char			*strs[] = {"Third", "Second", "First", 0};
+	t_list			*test = 0;
+	int				ret_test = 0;
+	int				ret_user = 0;
+
+	HEADER("assert_ft_lstsize");
+	SEP;
+	printf_rgb("255;199;6", "test: list of size 3.\n");
+	for (int i = 0; strs[i]; i++)
+		test_lstadd_front(&test, test_lstnew(strs[i]));
+	ret_test = test_lstsize(test);
+	ret_user = ft_lstsize(test);
+	if (ret_test == ret_user)
+		printf_rgb("57;181;74", "$> OK!\n");
+	else
+		printf_rgb("222;56;43", "$> KO! expected: %d, result: %d.\n", ret_test, ret_user);
+	destroy(test);
+}
+
+void	assert_ft_lstlast(void)
+{
+	char			*strs[] = {"Third", "Second", "First", 0};
+	t_list			*test = 0;
+	t_list			*ret_test;
+	t_list			*ret_user;
+
+	HEADER("assert_ft_lstlast");
+	SEP;
+	printf_rgb("255;199;6", "test: last element = %s.\n", strs[0]);
+	for (int i = 0; strs[i]; i++)
+		test_lstadd_front(&test, test_lstnew(strs[i]));
+	ret_test = test_lstlast(test);
+	ret_user = ft_lstlast(test);
+	lst_ret_cmp(ret_test, ret_user);
+	destroy(test);
 }
 
 void	bonus(void)
