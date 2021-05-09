@@ -5,6 +5,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "../libft.h"
 
 #define S1				"========================================================================================================================"
