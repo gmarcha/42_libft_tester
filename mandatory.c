@@ -1167,5 +1167,8 @@ void	mandatory(void)
 		assert_ft_putnbr_fd
 	};
 	for (int i = 0; i < 34; i++)
-		test[i]();
+		if (fork() == 0)
+			test[i]();
+		else
+			wait(0);
 }
