@@ -9,6 +9,7 @@ A simple step-by-step tester to C 42 Library.
 ./tester.sh all
 ```
 - Press Enter to perform each test.
+- To add tests for external functions, write asserts in `expand.c`, and change function `expand` in same file.
 
 ![Begin with check for forbidden functions and norminette.](/ressources/header.png)
 ![An example of an ouput.](/ressources/example.png)
