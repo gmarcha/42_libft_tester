@@ -293,6 +293,7 @@ void	assert_ft_lstlast(void)
 	char			**arrs[] = 	{(char *[]){"Third", "Second", "First", 0},
 								(char *[]){"", 0},
 								(char *[]){0},
+								0};
 	t_list			*test = 0;
 	t_list			*ret_test;
 	t_list			*ret_user;
