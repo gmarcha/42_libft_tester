@@ -1170,7 +1170,10 @@ void	mandatory(void)
 	};
 	for (int i = 0; i < 34; i++)
 		if (fork() == 0)
+		{
 			test[i]();
+			exit(0);
+		}
 		else
 			wait(0);
 }
