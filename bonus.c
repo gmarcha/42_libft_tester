@@ -334,15 +334,16 @@ void	assert_ft_lstclear(void)
 {
 	char			**arrs[] = 	{(char *[]){"Third", "Second", "First", 0},
 								(char *[]){"", 0},
+								(char *[]){0},
 								0};
 	t_list			*test = 0;
 
-	HEADER("assert_ft_lstlast");
+	HEADER("assert_ft_lstclear");
 	for (int i = 0; arrs[i]; i++)
 	{
 		SEP;
 		for (int j = 0; arrs[i][j]; j++)
-			test_lstadd_front(&test, test_lstnew(arrs[i][j]));
+			test_lstadd_front(&test, test_lstnew(strdup(arrs[i][j])));
 		printf_rgb("255;199;6", "test: list size = %d.\n", test_lstsize(test));
 		ft_lstclear(&test, free);
 		printf_rgb("57;181;74", "$> Done!\n");
