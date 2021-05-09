@@ -99,7 +99,7 @@ void	test_lstclear(t_list **lst, void (*del)(void*))
 	{
 		tmp = node;
 		node = node->next;
-		test_lstdelone(tmp);
+		test_lstdelone(tmp, del);
 	}
 	*lst = 0;
 }
