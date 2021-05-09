@@ -325,7 +325,7 @@ void	assert_ft_lstdelone(void)
 			ret = test_lstnew(strdup(strs[i]));
 		else
 			ret = test_lstnew(strs[i]);
-		ft_lstdelone(ret);
+		ft_lstdelone(ret, free);
 	}
 }
 
