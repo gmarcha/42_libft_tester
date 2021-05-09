@@ -3,6 +3,6 @@
 int	main(void)
 {
 	bonus();
-	END("@2021, Libft Test.");
+	END("@2021, 42 Libft Tester, bonus part.");
 	return (0);
 }
