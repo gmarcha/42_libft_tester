@@ -242,19 +242,19 @@ void	assert_ft_lstnew(void)
 	}
 }
 
-void	assert_ft_lstadd_front(void)
+void	assert_ft_lstadd(char *name, void (*f)(t_list **, t_list *), void (*ft_f)(t_list **, t_list *))
 {
 	char			*strs[] = {"Third", "Second", "First", 0};
 	t_list			*ret_test = 0;
 	t_list			*ret_user = 0;
 
-	HEADER("assert_ft_lstadd_front");
+	HEADER(name);
 	SEP;
 	printf_rgb("255;199;6", "test: add three elements.\n");
 	for (int i = 0; strs[i]; i++)
 	{
-		test_lstadd_front(&ret_test, test_lstnew(strs[i]));
-		ft_lstadd_front(&ret_user, test_lstnew(strs[i]));
+		f(&ret_test, test_lstnew(strs[i]));
+		ft_f(&ret_user, test_lstnew(strs[i]));
 	}
 	lst_out_cmp(ret_test, ret_user);
 	destroy(ret_test);
@@ -316,10 +316,10 @@ void	assert_ft_lstlast(void)
 void	bonus(void)
 {
 	assert_ft_lstnew();
-	assert_ft_lstadd_front();
+	assert_ft_lstadd("assert_ft_lstadd_front", test_lstadd_front, ft_lstadd_front);
 	assert_ft_lstsize();
 	assert_ft_lstlast();
-	// assert_ft_lstadd_back();
+	assert_ft_lstadd("assert_ft_lstadd_back", test_lstadd_back, ft_lstadd_back);
 	// assert_ft_lstdelone();
 	// assert_ft_lstclear();
 	// assert_ft_lstiter();
