@@ -263,23 +263,30 @@ void	assert_ft_lstadd_front(void)
 
 void	assert_ft_lstsize(void)
 {
-	char			*strs[] = {"Third", "Second", "First", 0};
+	char			*arrs[] = 	{(char *[]){"Third", "Second", "First", 0},
+								(char *[]){"First", "Second", "Third", 0},
+								(char *[]){"", 0},
+								(char *[]){0},
+								0};
 	t_list			*test = 0;
 	int				ret_test = 0;
 	int				ret_user = 0;
 
 	HEADER("assert_ft_lstsize");
-	SEP;
-	printf_rgb("255;199;6", "test: list of size 3.\n");
-	for (int i = 0; strs[i]; i++)
-		test_lstadd_front(&test, test_lstnew(strs[i]));
-	ret_test = test_lstsize(test);
-	ret_user = ft_lstsize(test);
-	if (ret_test == ret_user)
-		printf_rgb("57;181;74", "$> OK!\n");
-	else
-		printf_rgb("222;56;43", "$> KO! expected: %d, result: %d.\n", ret_test, ret_user);
-	destroy(test);
+	for (int i = 0; arrs[i]; i++)
+	{
+		SEP;
+		for (int j = 0; arrs[i][j]; j++)
+			test_lstadd_front(&test, test_lstnew(arrs[i][j]));
+		printf_rgb("255;199;6", "test: list of size %d.\n", ret_test = test_lstsize(test));
+		ret_user = ft_lstsize(test);
+		if (ret_test == ret_user)
+			printf_rgb("57;181;74", "$> OK!\n");
+		else
+			printf_rgb("222;56;43", "$> KO! expected: %d, result: %d.\n", ret_test, ret_user);
+		destroy(test);
+		test = 0;
+	}
 }
 
 void	assert_ft_lstlast(void)
