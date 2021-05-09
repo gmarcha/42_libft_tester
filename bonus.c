@@ -403,5 +403,11 @@ void	bonus(void)
 		// assert_ft_lstmap
 	};
 	for (int i = 0; i < 9 - 2; i++)
-		test[i]();
+		if (fork() == 0)
+		{
+			test[i]();
+			exit(0);
+		}
+		else
+			wait(0);
 }
