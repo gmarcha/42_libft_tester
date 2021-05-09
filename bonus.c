@@ -99,9 +99,7 @@ void	test_lstclear(t_list **lst, void (*del)(void*))
 	{
 		tmp = node;
 		node = node->next;
-		if (tmp->content)
-			del(tmp->content);
-		free(tmp);
+		test_lstdelone(tmp);
 	}
 	*lst = 0;
 }
@@ -310,6 +308,43 @@ void	assert_ft_lstlast(void)
 		lst_ret_cmp(ret_test, ret_user);
 		destroy(test);
 		test = 0;
+	}
+}
+
+void	assert_ft_lstdelone(void)
+{
+	char			*strs[] = {"Hello World!", 0};
+	t_list			*ret;
+
+	HEADER("assert_ft_lstdelone");
+	for (int i = 0; i < 2; i++)
+	{
+		SEP;
+		printf_rgb("255;199;6", "test: element->content = %12s.\n", strs[i]);
+		if (strs[i])
+			ret = test_lstnew(strdup(strs[i]));
+		else
+			ret = test_lstnew(strs[i]);
+		ft_lstdelone(ret);
+	}
+}
+
+void	assert_ft_lstclear(void)
+{
+	char			**arrs[] = 	{(char *[]){"Third", "Second", "First", 0},
+								(char *[]){"", 0},
+								(char *[]){0},
+								0};
+	t_list			*test = 0;
+
+	HEADER("assert_ft_lstlast");
+	for (int i = 0; arrs[i]; i++)
+	{
+		SEP;
+		for (int j = 0; arrs[i][j]; j++)
+			test_lstadd_front(&test, test_lstnew(arrs[i][j]));
+		printf_rgb("255;199;6", "test: list size = %d.\n", test_lstsize(test));
+		ft_lstclear(&test, free);
 	}
 }
 
