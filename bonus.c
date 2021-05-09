@@ -172,12 +172,12 @@ void	lst_ret_cmp(t_list *ret_test, t_list *ret_user)
 		if (ret_test)
 			printf_rgb("222;56;43", "%20s", ret_test->content);
 		else
-			printf_rgb("222;56;43", "%20s", "(null)");
+			printf_rgb("222;56;43", "%20s", "no list element");
 		printf_rgb("222;56;43", ", result: ");
 		if (ret_user)
 			printf_rgb("222;56;43", "%20s", ret_user->content);
 		else
-			printf_rgb("222;56;43", "%20s", "(null)");
+			printf_rgb("222;56;43", "%20s", "no list element");
 		printf_rgb("222;56;43", ".\n");
 	}
 }
