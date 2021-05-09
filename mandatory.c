@@ -658,7 +658,42 @@ void	assert_ft_is_to(char *name, int (*f)(int), int (*ft_f)(int), int flag)
 		printf_rgb("57;181;74", "$> OK!\n");
 }
 
-void	assert_ft_strchr(char *name, char *(*f)(const char *, int), char *(*ft_f)(const char *, int))
+void	assert_ft_isalpha(void)
+{
+	assert_ft_is_to("assert_ft_isalpha", isalpha, ft_isalpha, 0);
+}
+
+void	assert_ft_isdigit(void)
+{
+	assert_ft_is_to("assert_ft_isdigit", isdigit, ft_isdigit, 0);
+}
+
+void	assert_ft_isalnum(void)
+{
+	assert_ft_is_to("assert_ft_isalnum", isalnum, ft_isalnum, 0);
+}
+
+void	assert_ft_isascii(void)
+{
+	assert_ft_is_to("assert_ft_isascii", isascii, ft_isascii, 0);
+}
+
+void	assert_ft_isprint(void)
+{
+	assert_ft_is_to("assert_ft_isprint", isprint, ft_isprint, 0);
+}
+
+void	assert_ft_toupper(void)
+{
+	assert_ft_is_to("assert_ft_toupper", toupper, ft_toupper, 1);
+}
+
+void	assert_ft_tolower(void)
+{
+	assert_ft_is_to("assert_ft_tolower", tolower, ft_tolower, 1);
+}
+
+void	assert_ft_strchr_(char *name, char *(*f)(const char *, int), char *(*ft_f)(const char *, int))
 {
 	char			charset[] = "zaj";
 	char			test[] = "abcdefghijabcdefghij";
@@ -675,6 +710,16 @@ void	assert_ft_strchr(char *name, char *(*f)(const char *, int), char *(*ft_f)(c
 		ret_user = ft_f(user, charset[i]);
 		str_ret_cmp(ret_test, ret_user);
 	}
+}
+
+void	assert_ft_strchr(void)
+{
+	assert_ft_strchr_("assert_strchr", strchr, ft_strchr);
+}
+
+void	assert_ft_strrchr(void)
+{
+	assert_ft_strchr_("assert_strrchr", strrchr, ft_strrchr);
 }
 
 void	assert_ft_strncmp(void)
@@ -1093,15 +1138,15 @@ void	mandatory(void)
 	assert_ft_memchr();
 	assert_ft_memcmp();
 	assert_ft_strlen();
-	assert_ft_is_to("assert_ft_isalpha", isalpha, ft_isalpha, 0);
-	assert_ft_is_to("assert_ft_isdigit", isdigit, ft_isdigit, 0);
-	assert_ft_is_to("assert_ft_isalnum", isalnum, ft_isalnum, 0);
-	assert_ft_is_to("assert_ft_isascii", isascii, ft_isascii, 0);
-	assert_ft_is_to("assert_ft_isprint", isprint, ft_isprint, 0);
-	assert_ft_is_to("assert_ft_toupper", toupper, ft_toupper, 1);
-	assert_ft_is_to("assert_ft_tolower", tolower, ft_tolower, 1);
-	assert_ft_strchr("assert_strchr", strchr, ft_strchr);
-	assert_ft_strchr("assert_strrchr", strrchr, ft_strrchr);
+	assert_ft_isalpha();
+	assert_ft_isdigit();
+	assert_ft_isalnum();
+	assert_ft_isascii();
+	assert_ft_isprint();
+	assert_ft_toupper();
+	assert_ft_tolower();
+	assert_ft_strchr();
+	assert_ft_strrchr();
 	assert_ft_strncmp();
 	assert_ft_strlcpy();
 	assert_ft_strlcat();

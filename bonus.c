@@ -157,6 +157,19 @@ t_list	*test_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	return (new);
 }
 
+void	endl(void *data)
+{
+	char	*str;
+	int		i;
+
+	str = data;
+	i = 0;
+	while (str[i])
+		i++;
+	write(1, str, i);
+	write(1, "\n", 1);
+}
+
 void	destroy(t_list *lst)
 {
 	t_list			*tmp;
@@ -259,6 +272,16 @@ void	assert_ft_lstadd(char *name, void (*f)(t_list **, t_list *), void (*ft_f)(t
 	destroy(ret_user);
 }
 
+void	assert_ft_lstadd_front(void)
+{
+	assert_ft_lstadd("assert_ft_lstadd_front", test_lstadd_front, ft_lstadd_front);
+}
+
+void	assert_ft_lstadd_back(void)
+{
+	assert_ft_lstadd("assert_ft_lstadd_back", test_lstadd_back, ft_lstadd_back);
+}
+
 void	assert_ft_lstsize(void)
 {
 	char			**arrs[] = 	{(char *[]){"Third", "Second", "First", 0},
@@ -350,13 +373,27 @@ void	assert_ft_lstclear(void)
 	}
 }
 
+// void	assert_ft_lstiter(void)
+// {
+// 	for (int i = 0; strs[i]; i++)
+// 	{
+// 		test_lstadd_front(ret_test, test_lstnew(strs[i]));
+// 		test_lstadd_front(ret_user, test_lstnew(strs[i]));
+// 	}
+// }
+
+// void	assert_ft_lstmap(void)
+// {
+
+// }
+
 void	bonus(void)
 {
 	assert_ft_lstnew();
-	assert_ft_lstadd("assert_ft_lstadd_front", test_lstadd_front, ft_lstadd_front);
+	assert_ft_lstadd_front();
 	assert_ft_lstsize();
 	assert_ft_lstlast();
-	assert_ft_lstadd("assert_ft_lstadd_back", test_lstadd_back, ft_lstadd_back);
+	assert_ft_lstadd_back();
 	assert_ft_lstdelone();
 	assert_ft_lstclear();
 	// assert_ft_lstiter();
