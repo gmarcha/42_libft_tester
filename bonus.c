@@ -355,8 +355,8 @@ void	bonus(void)
 	assert_ft_lstsize();
 	assert_ft_lstlast();
 	assert_ft_lstadd("assert_ft_lstadd_back", test_lstadd_back, ft_lstadd_back);
-	// assert_ft_lstdelone();
-	// assert_ft_lstclear();
+	assert_ft_lstdelone();
+	assert_ft_lstclear();
 	// assert_ft_lstiter();
 	// assert_ft_lstmap();
 }
