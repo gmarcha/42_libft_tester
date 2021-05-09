@@ -1,12 +1,14 @@
-# 42_libft_tester
-A simple and step-by-step tester to C 42 Library.
+# 42 Libft Tester
+A simple step-by-step tester to C 42 Library.
 
 # How to use it ?
-You need to clone this tester in your own Libft repository, go in the tester directory, and run tester.sh with an argument:\
-`./tester.sh mand` or `./tester.sh m`\
-`./tester.sh bonus` or `./tester.sh b`\
-`./tester.sh all` or `./tester.sh a`\
-Press enter to perform next test.
+- Clone the repository in your Libft directory, go in the tester directory, and run `tester.sh` with an argument:
+```
+./tester.sh mand
+./tester.sh bonus
+./tester.sh all
+```
+- Press Enter to perform each test.
 
 ![Begin with check for forbidden functions and norminette.](/ressources/header.png)
 ![An example of an ouput.](/ressources/example.png)
