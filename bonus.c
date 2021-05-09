@@ -326,6 +326,7 @@ void	assert_ft_lstdelone(void)
 		else
 			ret = test_lstnew(strs[i]);
 		ft_lstdelone(ret, free);
+		printf_rgb("57;181;74", "$> Done!\n");
 	}
 }
 
@@ -345,6 +346,7 @@ void	assert_ft_lstclear(void)
 			test_lstadd_front(&test, test_lstnew(arrs[i][j]));
 		printf_rgb("255;199;6", "test: list size = %d.\n", test_lstsize(test));
 		ft_lstclear(&test, free);
+		printf_rgb("57;181;74", "$> Done!\n");
 	}
 }
 
