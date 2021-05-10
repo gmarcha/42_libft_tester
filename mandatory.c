@@ -14,7 +14,7 @@
 #define S3				"____________________________________________________________________________________________________________________________________________"
 #define SEP				printf_rgb("255;199;6", S2"\n")
 #define HEADER(str)		getchar();printf_rgb("136;23;152;1", "\n"S3"\n\n%140s\n", str)
-#define END(str)		printf_rgb("136;23;152;3", "\n%140s\n%140s\n%140s\n", "Test finished.", "https://github.com/gmarcha", str)
+#define END(str)		printf_rgb("136;23;152;3", "\n%140s\n%140s\n%140s\n", "Test finished.", str, "https://github.com/gmarcha")
 
 void	printf_rgb(char *rgb, char *format, ...);
 
