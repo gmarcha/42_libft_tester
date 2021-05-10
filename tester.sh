@@ -33,14 +33,28 @@ echo "               ███████║ █████╔╝    ██║
 echo "               ╚════██║██╔═══╝     ██║     ██║██╔══██╗██╔══╝     ██║          ██║   ██╔══╝  ╚════██║   ██║   ██╔══╝  ██╔══██╗"
 echo "                    ██║███████╗    ███████╗██║██████╔╝██║        ██║          ██║   ███████╗███████║   ██║   ███████╗██║  ██║"
 echo "                    ╚═╝╚══════╝    ╚══════╝╚═╝╚═════╝ ╚═╝        ╚═╝          ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝"
-printf "\n$SEP\n\n"
-printf "Forbidden functions:\n\n\033[0;38;2;222;56;43m"
+printf "\n$SEP\n\nForbidden functions:\n\n\033[0;38;2;222;56;43m"
+K=0
 grep "[^_]printf" $FILES
-if [ $? -ne 0 ]; then
+if [ $? -eq 0 ]; then
+	((K++))
+fi
+grep "[^_]strlen" $FILES
+if [ $? -eq 0 ]; then
+	((K++))
+fi
+grep "[^_]strcpy" $FILES
+if [ $? -eq 0 ]; then
+	((K++))
+fi
+grep "[^_]strcat" $FILES
+if [ $? -eq 0 ]; then
+	((K++))
+fi
+if [ $K -eq 0 ]; then
 	printf "\033[38;2;57;181;74mCheat free.\n"
 fi
-printf "\033[38;2;136;23;152;1;3m\n$SEP\n\n"
-printf "Norm test:\n\n\033[0;38;2;57;181;74m"
+printf "\033[38;2;136;23;152;1;3m\n$SEP\n\nNorm test:\n\n\033[0;38;2;57;181;74m"
 norminette libft.h $FILES | grep "OK"
 printf "\n\033[0;38;2;222;56;43m"
 norminette libft.h $FILES | grep "Error"
