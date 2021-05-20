@@ -419,7 +419,7 @@ void	out_cmp(void)
 
 	read(fd_test, ret_test, 4096);
 	read(fd_user, ret_user, 4096);
-	if (ret_test != 0 && ret_user != 0 && strcmp(ret_test, ret_user) == 0)
+	if (strcmp(ret_test, ret_user) == 0)
 		printf_rgb("57;181;74", "$> OK!\n");
 	else
 		printf_rgb("222;56;43", "$> KO! invalid diff.\n");
