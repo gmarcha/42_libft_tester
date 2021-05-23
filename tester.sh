@@ -34,10 +34,14 @@ echo "               ╚════██║██╔═══╝     ██║
 echo "                    ██║███████╗    ███████╗██║██████╔╝██║        ██║          ██║   ███████╗███████║   ██║   ███████╗██║  ██║"
 echo "                    ╚═╝╚══════╝    ╚══════╝╚═╝╚═════╝ ╚═╝        ╚═╝          ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝"
 printf "\n$SEP\n\nForbidden functions:\n\n\033[0;38;2;222;56;43m"
-FUN=("[^_]printf(" "[^_]memset(" "[^_]bzero(" "[^_]memcpy(" "[^_]memccpy(" "[^_]memmove(" "[^_]memchr(" "[^_]memcmp(" "[^_]strlen(" "[^_]isspace(" "[^_]isupper(" "[^_]islower(" "[^_]isalpha(" "[^_]isdigit(" "[^_]isalnum(" "[^_]isascii(" "[^_]isprint(" "[^_]toupper(" "[^_]tolower(" "[^_]strchr(" "[^_]strrchr(" "[^_]strcmp(" "[^_]strncmp(" "[^_]strcpy(" "[^_]strncpy(" "[^_]strlcpy(" "[^_]strcat(" "[^_]strncat(" "[^_]strlcat(" "[^_]strstr(" "[^_]strnstr(" "[^_]atoi(" "[^_]atol(" "[^_]itoa(" "[^_]calloc(" "[^_]realloc(" "[^_]strdup(")
+FUN=("[^_]printf(" "[^_]memset(" "[^_]bzero(" "[^_]memcpy(" "[^_]memccpy(" "[^_]memmove(" "[^_]memchr(" "[^_]memcmp("
+	"[^_]strlen(" "[^_]isspace(" "[^_]isupper(" "[^_]islower(" "[^_]isalpha(" "[^_]isdigit(" "[^_]isalnum(" "[^_]isascii("
+	"[^_]isprint(" "[^_]toupper(" "[^_]tolower(" "[^_]strchr(" "[^_]strrchr(" "[^_]strcmp(" "[^_]strncmp(" "[^_]strcpy("
+	"[^_]strncpy(" "[^_]strlcpy(" "[^_]strcat(" "[^_]strncat(" "[^_]strlcat(" "[^_]strstr(" "[^_]strnstr(" "[^_]atoi("
+	"[^_]atol(" "[^_]itoa(" "[^_]calloc(" "[^_]realloc(" "[^_]strdup(")
 K=0
 for element in ${FUN[@]}; do
-	grep element $FILES
+	grep -nH "$element" $FILES
 	if [ $? -eq 0 ]; then
 		((K++))
 	fi
