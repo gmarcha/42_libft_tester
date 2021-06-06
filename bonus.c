@@ -18,6 +18,8 @@
 
 void	printf_rgb(char *rgb, char *format, ...);
 
+void	out_cmp(void);
+
 t_list	*test_lstnew(void *content)
 {
 	t_list			*node;
@@ -405,14 +407,59 @@ void	assert_ft_lstclear(void)
 	}
 }
 
-// void	assert_ft_lstiter(void)
-// {
-// 	for (int i = 0; strs[i]; i++)
-// 	{
-// 		test_lstadd_front(ret_test, test_lstnew(strs[i]));
-// 		test_lstadd_front(ret_user, test_lstnew(strs[i]));
-// 	}
-// }
+void	test_iter(void *s)
+{
+	printf("%s\n", (char *)s);
+}
+
+void	assert_ft_lstiter(void)
+{
+	int				fd_test;
+	int				fd_user;
+	char			*strs[] = {"Third", "Second", "First", 0};
+	t_list			*ret_test = 0;
+	t_list			*ret_user = 0;
+
+	HEADER("assert_ft_lstiter");
+	SEP;
+	if (fork() == 0)
+	{
+		for (int j = 0; strs[j]; j++)
+			test_lstadd_front(&ret_test, test_lstnew(strs[j]));
+		for (int j = 0; strs[j]; j++)
+			test_lstadd_front(&ret_user, test_lstnew(strs[j]));
+		printf_rgb("255;199;6", "test: iterate through linked list.\n");
+		if (fork() == 0)
+		{
+			fd_test = open("out_test", O_CREAT | O_WRONLY | O_TRUNC);
+			dup2(fd_test, 1);
+			test_lstiter(ret_test, test_iter);
+			close(fd_test);
+			exit(0);
+		}
+		else
+			wait(0);
+		if (fork() == 0)
+		{
+			fd_user = open("out_user", O_CREAT | O_WRONLY | O_TRUNC);
+			dup2(fd_user, 1);
+			ft_lstiter(ret_user, test_iter);
+			close(fd_user);
+			exit(0);
+		}
+		else
+			wait(0);
+		exit(0);
+		out_cmp();
+		remove("out_test");
+		remove("out_user");
+		destroy(ret_test);
+		destroy(ret_user);
+		exit(0);
+	}
+	else
+		wait(0);
+}
 
 // void	assert_ft_lstmap(void)
 // {
