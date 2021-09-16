@@ -1,5 +1,5 @@
 # 42 Libft Tester
-A simple step-by-step tester to C 42 Library.
+A simple step-by-step tester to C 42 Library. (Outdated)
 
 # How to use it ?
 - Clone the repository in your Libft directory, go in the tester directory, and run `tester.sh` with an argument:
