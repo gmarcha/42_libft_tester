@@ -1174,8 +1174,8 @@ void	assert_ft_strmapi(void)
 
 void	assert_ft_putchar_fd(void)
 {
-	int				fd_test = open("out_test", O_CREAT | O_WRONLY | O_TRUNC);
-	int				fd_user = open("out_user", O_CREAT | O_WRONLY | O_TRUNC);
+	int				fd_test = open("out_test", O_CREAT | O_WRONLY | O_TRUNC, 0600);
+	int				fd_user = open("out_user", O_CREAT | O_WRONLY | O_TRUNC, 0600);
 
 	HEADER("assert_ft_putchar_fd");
 	SEP;
@@ -1194,8 +1194,8 @@ void	assert_ft_putchar_fd(void)
 
 void	assert_ft_putstr_fd(void)
 {
-	int				fd_test = open("out_test", O_CREAT | O_WRONLY | O_TRUNC);
-	int				fd_user = open("out_user", O_CREAT | O_WRONLY | O_TRUNC);
+	int				fd_test = open("out_test", O_CREAT | O_WRONLY | O_TRUNC, 0600);
+	int				fd_user = open("out_user", O_CREAT | O_WRONLY | O_TRUNC, 0600);
 	char			*strs[] = {"Hello World!", " ", "", 0};
 
 	HEADER("assert_ft_putstr_fd");
@@ -1215,8 +1215,8 @@ void	assert_ft_putstr_fd(void)
 
 void	assert_ft_putendl_fd(void)
 {
-	int				fd_test = open("out_test", O_CREAT | O_WRONLY | O_TRUNC);
-	int				fd_user = open("out_user", O_CREAT | O_WRONLY | O_TRUNC);
+	int				fd_test = open("out_test", O_CREAT | O_WRONLY | O_TRUNC, 0600);
+	int				fd_user = open("out_user", O_CREAT | O_WRONLY | O_TRUNC, 0600);
 	char			*strs[] = {"Hello World!", " ", "", 0};
 
 	HEADER("assert_ft_putendl_fd");
@@ -1236,8 +1236,8 @@ void	assert_ft_putendl_fd(void)
 
 void	assert_ft_putnbr_fd(void)
 {
-	int				fd_test = open("out_test", O_CREAT | O_WRONLY | O_TRUNC);
-	int				fd_user = open("out_user", O_CREAT | O_WRONLY | O_TRUNC);
+	int				fd_test = open("out_test", O_CREAT | O_WRONLY | O_TRUNC, 0600);
+	int				fd_user = open("out_user", O_CREAT | O_WRONLY | O_TRUNC, 0600);
 	int				input[] = {0, 1, -1, 42, -42, 2147483647, -2147483648};
 
 	HEADER("assert_ft_putnbr_fd");
